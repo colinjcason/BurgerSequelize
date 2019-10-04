@@ -2,17 +2,21 @@ var express = require("express");
 
 var db = require("../models");
 
-var router = express.Router();
+var router = express.Router(); 
 
 
 router.get("/", function(req, res) {
     db.Burger.findAll({}).then(function(dbBurger) {
-        res.render("index");
+        res.render("index", {burgers: dbBurger});
     });
 });
 
 router.post("/api/burgers/:name", function(req, res) {
-    db.Burger.create(req.body).then(function(dbBurger) {
+    db.Burger.create({
+        name: "req.params.name",
+        devoured: 0
+    }).then(function(dbBurger) {
+        console.log("burger: ",dbBurger);
         res.json(dbBurger);
     });
 });

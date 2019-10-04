@@ -2,11 +2,11 @@ $(function() {
     $("#burger-btn").on("click", function(event) {
         event.preventDefault();
 
-        $.post("/api/burgers/" + $("#newBurger").val(), function() {
-            console.log("new burger added");            
+        $.post("/api/burgers/" + $("#newBurger").val(), function(data) {
+            console.log(data);            
         }).then(function() {
             location.reload();
-        });        
+        });
     });
 
     $(".devour").on("click", function() {
